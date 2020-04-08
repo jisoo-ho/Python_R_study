@@ -1,0 +1,43 @@
+---
+title: "Dashboard Example"
+output: # 출력 결과에 대한 환경 설정(아랫줄들을 붙여쓰면 안된다, 전체적인 위치는 columns 구조 )
+  flexdashboard::flex_dashboard:
+    orientation: columns # 기본위치값이 열단위로 만들어진다는 의미(columns, rows 선택 가능)
+    vertical_layout: scroll # 가로 사이즈를 flexdashboard 사이즈에 맞춰서 꽉 채우라는 의미(fill, scroll 선택 가능)
+---
+
+```{r setup, include=FALSE}
+# 청크코드의 이름은 setup으로 지정, include는 안시키겠다.(문서 만들때만 잠깐 사용)
+library(flexdashboard) 
+library(ggplot2) #해당 라이브러리를 계속 사용하면 여기에 써놓고, 한번만 사용할거면 청크코드에 쓰면 된다.
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+<!-- 첫 번째 컬럼 가로크기를 650(이 내부에 들어가는 것은 컬럼으로 만들겠다.라고 선언(Column 대소문자 구분)) -->
+### Chart A
+
+```{r}
+ggplot(data=mtcars, aes(x=hp, y=mpg, color=as.factor(cyl)))+
+  geom_point()
+```
+
+Column {.tabset .tabset-fade} 
+-----------------------------------------------------------------------
+<!-- 두 번째 컬럼 가로크기를 350 -->
+<!--  .tabset은 탭을 나눠주는 방법, fade는 전환시 부드러운 효과  -->
+### Chart B
+
+```{r}
+ggplot(data=mtcars)+
+  geom_bar(mapping=aes(x=cyl, fill=as.factor(am)))
+```
+
+### Chart C
+
+```{r}
+ggplot(data=mtcars)+
+  geom_bar(mapping = aes(x=cyl, fill=as.factor(cyl)), position="dodge")+
+  coord_polar() # 나이팅게일 함수 같은 방사형 차트 표시해주는 함수
+```
+
