@@ -71,7 +71,7 @@ def print_gesipan(gesipan_list, no):
             gesipan_list[i].print_all()
 #-----------def print_gesipan() : END ---------
 
-#글 수정
+#글 수정(수정하려면 5번으로 종료한번해서 저장하고 다시 실행해야한다.)
 def mod_gesipan(gesipan_list, no):
     title = input("수정할 제목 : ")
     name = input("수정할 이름 : ")
@@ -79,7 +79,7 @@ def mod_gesipan(gesipan_list, no):
 
     for i, gesipan in enumerate(gesipan_list):
         if gesipan.no == no:
-            gesipan_list[i].__init__(no, title, name, contents, hit=gesipan_list[1].getHit())
+            gesipan_list[i].__init__(no, title, name, contents, hit=gesipan_list[0].getHit())
 #------------def mod_gesipan() : END ----------
 
 #글 삭제하기(한번 종료해서 저장 후에 삭제할 수 있다.)
